@@ -1,20 +1,40 @@
 <template>
     <div class="lens-list">
-      <h2>Saved Lens Configurations</h2>
-      <div v-if="error" class="error-message">
+      <h2 class="font-bold text-lg bg-gray-800 text-white p-4">Saved Lens Configurations</h2>
+      <div class="flex flex-col gap-4 p-4">
+        <div v-if="error" class="error-message bg-red-300 text-red-950 font-bold text-sm rounded-md p-2">
         Error: {{ error }}
+        </div>
+        <ul v-if="lenses.length > 0">
+          <li v-for="lens in lenses" :key="lens.id">
+            <span>Front Radius: {{ lens.frontRadius }}</span>
+            <span>Back Radius: {{ lens.backRadius }}</span>
+            <span>Thickness: {{ lens.thickness }}</span>
+            <button @click="selectLens(lens)">Edit</button>
+          </li>
+        </ul>
+
+        <div v-else>
+          No saved configurations found.
+        </div>
+        <div class="flex flex-col gap-4">
+          <div class="bg-white shadow-lg rounded-md p-2">
+            <div>
+              <div class="font-bold text-md">Titulo del lente</div>
+              <div class="flex gap-2 text-sm">
+                <div><span class="font-bold">F: </span>75 mm</div>
+                <div><span class="font-bold">B: </span>8,5 mm</div>
+                <div><span class="font-bold">T: </span>10 mm</div>
+              </div>
+            </div>
+            <div class="flex gap-2 justify-end">
+              <button><font-awesome-icon icon="edit" /></button>
+              <button><font-awesome-icon icon="trash-alt" /></button>
+            </div>
+          </div>
+        </div>
       </div>
-      <ul v-if="lenses.length > 0">
-        <li v-for="lens in lenses" :key="lens.id">
-          <span>Front Radius: {{ lens.frontRadius }}</span>
-          <span>Back Radius: {{ lens.backRadius }}</span>
-          <span>Thickness: {{ lens.thickness }}</span>
-          <button @click="selectLens(lens)">Edit</button>
-        </li>
-      </ul>
-      <div v-else>
-        No saved configurations found.
-      </div>
+      
     </div>
   </template>
   
@@ -54,33 +74,6 @@
   </script>
   
   <style scoped>
-  .lens-list {
-    margin: 0 auto;
-    padding: 1rem;
-  }
   
-  .error-message {
-    color: red;
-  }
-  
-  .lens-list ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .lens-list li {
-    margin-bottom: 1rem;
-    padding: 0.5rem;
-    background-color: #f3f3f3;
-    cursor: pointer;
-  }
-  
-  .lens-list span {
-    margin-right: 1rem;
-  }
-  
-  button {
-    margin-left: 1rem;
-  }
   </style>
   

@@ -1,21 +1,21 @@
 <template>
     <div class="flex flex-col justify-center items-center gap-4">
-        <svg width="400" height="200" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+        <svg width="600" height="300" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
       <!-- Lens curves -->
       <path :d="lensPath" fill="transparent" stroke="black" />
       
      
     <!-- Centered horizontal and vertical lines -->
-    <line x1="20" y1="100" x2="380" y2="100" stroke="black" stroke-width="1" />
-    <line x1="200" y1="10" x2="200" y2="190" stroke="black" stroke-width="1" />
+    <line x1="20" y1="150" x2="580" y2="150" stroke="black" stroke-width="1" />
+    <line x1="300" y1="10" x2="300" y2="290" stroke="black" stroke-width="1" />
 
     <!-- Labels for the horizontal line ends -->
-    <text x="20" y="120" font-family="Verdana" font-size="10" text-anchor="start">-1000 mm</text>
-    <text x="380" y="120" font-family="Verdana" font-size="10" text-anchor="end">1000 mm</text>
+    <text x="20" y="170" font-family="Verdana" font-size="10" text-anchor="start">-1000 mm</text>
+    <text x="580" y="170" font-family="Verdana" font-size="10" text-anchor="end">1000 mm</text>
 
     <!-- Focal points positioned based on the computed scaling factor -->
-    <circle v-if="focalLength" :cx="focalXPosition(focalLength)" cy="100" r="2" fill="red" />
-    <circle v-if="focalLength" :cx="focalXPosition(-focalLength)" cy="100" r="2" fill="red" />
+    <circle v-if="focalLength" :cx="focalXPosition(focalLength)" cy="150" r="2" fill="red" />
+    <circle v-if="focalLength" :cx="focalXPosition(-focalLength)" cy="150" r="2" fill="red" />
 
     <!-- Focal length text -->
     
@@ -44,10 +44,10 @@
       // we need to map the focal length range (-1000 to 1000) to this range.
       return (focalLengthValue) => {
         const svgRangeStart = 20;
-        const svgRangeEnd = 380;
+        const svgRangeEnd = 580;
         const svgRange = svgRangeEnd - svgRangeStart;
         // Map the focal length to the SVG range
-        const position = (focalLengthValue / 1000) * svgRange / 2 + 200; // 200 is the center of the viewBox
+        const position = (focalLengthValue / 1000) * svgRange / 2 + 300; // 200 is the center of the viewBox
         return position;
       };
     },
@@ -58,14 +58,14 @@
 
         lensPath() {
     // Constants for SVG dimensions and lens properties
-    const viewBoxHeight = 200; // Height of the SVG's viewBox
+    const viewBoxHeight = 300; // Height of the SVG's viewBox
     const lensHeight = 150; // The vertical "diameter" of the lens, which remains constant
     const centerY = viewBoxHeight / 2; // Vertical center of the SVG
     const thickness = this.lensParams.thickness; // The lens thickness
 
     // Horizontal center positions for the front and back curves
-    const frontSurfaceCenterX = 200 - thickness / 2;
-    const backSurfaceCenterX = 200 + thickness / 2;
+    const frontSurfaceCenterX = 300 - thickness / 2;
+    const backSurfaceCenterX = 300 + thickness / 2;
 
     // The y-coordinates for the top and bottom of the lens
     const topY = centerY - lensHeight / 2;

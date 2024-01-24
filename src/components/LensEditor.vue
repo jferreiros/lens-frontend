@@ -1,17 +1,14 @@
 <template>
-  <div class="bg-opacity-75 rounded-lg w-full">
-    <h2 class="text-black font-bold text-xl mb-4">Lens Parameters</h2>
-    <form @submit.prevent="saveLens" class="space-y-6">
-      <h3 class="text-black font-bold">Radius of curvature (mm)</h3>
-      <div class="space-y-4">
-        <div class="text-left">
+  <div class="bg-opacity-75 rounded-lg w-full overflow-hidden">
+    <h2 class="text-white font-bold text-lg bg-red-600 p-4">Lens Parameters</h2>
+    <form @submit.prevent="saveLens" class="p-4 flex flex-col gap-2">
+      <h3 class="text-gray-900 font-bold text-center">Radius of curvature (mm)</h3>
+      <div class="flex flex-col gap-2">
+        <div class="text-left border border-gray-300 rounded-lg p-2">
           <label class="block text-sm font-bold" for="front-radius"
             >Front:</label
           >
-          <div class="w-full flex justify-between">
-            <span class="range-min text-sm">-2594 mm</span>
-            <span class="range-max text-sm">113.3 mm</span>
-            </div>
+          
 
             <input
               type="range"
@@ -22,7 +19,10 @@
               step="0.05"
               class="w-full mt-1"
             />
-            
+            <div class="w-full flex justify-between">
+            <span class="range-min text-sm">-2594 mm</span>
+            <span class="range-max text-sm">113.3 mm</span>
+          </div>
 
           <div
             class="text-md bg-gray-200 rounded-full px-3 py-1 font-semibold mt-1 inline-block"
@@ -31,12 +31,9 @@
           </div>
         </div>
 
-        <div class="text-left">
+        <div class="text-left border border-gray-300 rounded-lg p-2">
           <label class="block text-sm font-bold" for="back-radius">Back:</label>
-          <div class="w-full flex justify-between">
-            <span class="range-min text-sm">-2594 mm</span>
-            <span class="range-max text-sm">113.3 mm</span>
-            </div>
+          
             <input
               type="range"
               id="back-radius"
@@ -46,7 +43,10 @@
               step="0.1"
               class="w-full mt-1"
             />
-            
+            <div class="w-full flex justify-between">
+            <span class="range-min text-sm">-2594 mm</span>
+            <span class="range-max text-sm">113.3 mm</span>
+            </div>
 
           <div
             class="text-md bg-gray-200 rounded-full px-3 py-1 font-semibold mt-1 inline-block"
@@ -56,8 +56,8 @@
         </div>
       </div>
 
-      <div class="space-y-4 text-left">
-        <label class="block text-sm font-bold">Thickness (mm):</label>
+      <div class="text-left">
+        <h3 class="text-black font-bold text-center">Thickness (mm):</h3>
         <input
           type="range"
           id="thickness"

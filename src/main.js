@@ -1,5 +1,13 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import './assets/styles/tailwind.css';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-createApp(App).mount('#app')
+library.add(faEdit, faTrashAlt)
+
+
+const app = createApp(App)
+app.component('font-awesome-icon', FontAwesomeIcon)
+app.mount('#app')

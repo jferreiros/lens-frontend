@@ -1,15 +1,20 @@
 <template>
-  <div class="min-h-screen w-full bg-blue-500 flex items-center justify-center">
-    <div class="max-w-10xl w-full mx-auto p-4">
-      <h1 class="text-center text-white text-3xl font-bold mb-8">Meetoptics Exercise</h1>
-      <div class="flex justify-between gap-4">
-        <div class="bg-white rounded-lg p-4 shadow-lg w-96"> <!-- 300px width -->
+  <div class="min-h-screen w-full bg-gray-200 flex justify-center">
+    <div class="max-w-10xl w-full mx-auto">
+      <div class="w-full text-center bg-gray-950 p-4">      
+        <img src="./assets/images/logomeetoptics.png" alt="">
+      </div>
+      <div class="bg-white w-full p-6 text-xl font-bold text-left">
+        Custom Lent builder
+      </div>
+      <div class="flex justify-between gap-4 p-4">
+        <div class="bg-white rounded-lg shadow-lg w-96"> <!-- 300px width -->
           <LensEditor @parameters-changed="updateLens" />
         </div>
         <div class="bg-white bg-opacity-75 rounded-lg p-4 shadow-lg flex-1 flex items-center justify-center">
           <LensDisplay :lensParams="currentLensParams" />
         </div>
-        <div class="bg-white bg-opacity-75 rounded-lg p-4 shadow-lg w-72"> <!-- 300px width -->
+        <div class="bg-gray-100 rounded-lg overflow-hidden shadow-lg w-72"> <!-- 300px width -->
           <LensList @edit-lens="editLens" />
         </div>
       </div>
