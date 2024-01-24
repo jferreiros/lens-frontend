@@ -110,8 +110,8 @@ export default {
         frontRadius: 0,
         backRadius: 0,
         thickness: 10,
-      },
-      lensTitle: "", // Add this new data property for the lens configuration title
+        lensTitle: "",
+      },       // Add this new data property for the lens configuration title
     };
   },
   methods: {
