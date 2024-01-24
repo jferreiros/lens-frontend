@@ -5,15 +5,22 @@
         <div v-if="error" class="error-message bg-red-300 text-red-950 font-bold text-sm rounded-md p-2">
         Error: {{ error }}
         </div>
-        <ul v-if="lenses.length > 0">
-          <li v-for="lens in lenses" :key="lens.id">
-            <span>Front Radius: {{ lens.frontRadius }}</span>
-            <span>Back Radius: {{ lens.backRadius }}</span>
-            <span>Thickness: {{ lens.thickness }}</span>
-            <button @click="selectLens(lens)">Edit</button>
-          </li>
-        </ul>
-
+        <div v-if="lenses.length > 0" class="flex flex-col gap-4">
+          <div v-for="lens in lenses" :key="lens.id" class="bg-white shadow-lg rounded-md p-2">
+            <div>
+              <div class="font-bold text-md">{{ lens.lensTitle }}</div>
+              <div class="flex gap-2 text-sm">
+                <div><span class="font-bold">F: </span>{{ lens.frontRadius }} mm</div>
+                <div><span class="font-bold">B: </span>{{ lens.backRadius }} mm</div>
+                <div><span class="font-bold">T: </span>{{ lens.thickness }} mm</div>
+              </div>
+            </div>
+            <div class="flex gap-2 justify-end">
+              <button @click="selectLens(lens)"><font-awesome-icon icon="edit" /></button>
+              <button><font-awesome-icon icon="trash-alt" /></button>
+            </div>
+          </div>
+        </div>
         <div v-else>
           No saved configurations found.
         </div>
