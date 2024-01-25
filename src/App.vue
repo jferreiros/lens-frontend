@@ -10,7 +10,7 @@
       <div class="flex justify-between gap-4 p-4 row-span-10">
         <div class="bg-white rounded-lg shadow-lg w-96"> 
           <LentEditor
-            :editLens="currentLentParams"
+            :editLent="currentLentParams"
             @parameters-changed="onParametersChanged"
             @lent-saved="fetchLenses"
             @lent-updated="fetchLenses"

@@ -2,14 +2,14 @@
   <div class="bg-opacity-75 rounded-lg w-full overflow-hidden">
     <h2 class="text-white font-bold text-lg bg-red-600 p-4">Lent Parameters</h2>
     
-    <form @submit.prevent="submitLens" class="p-4 flex flex-col gap-2">
+    <form @submit.prevent="submitLent" class="p-4 flex flex-col gap-2">
       <div class="grid grid-cols-3 gap-2">
         <div class="text-left col-span-2">
           <label for="lens-title" class="text-sm font-bold">Title:</label>
           <input
             type="text"
             id="lens-title"
-            v-model="lensParams.lensTitle"
+            v-model="lentParams.lensTitle"
             :class="{'bg-lightblue': isEditing}"
             class="w-full px-3 py-2 border rounded mt-1"
             placeholder="Enter lent title"
@@ -35,7 +35,7 @@
           <input
             type="range"
             id="front-radius"
-            v-model.number="lensParams.frontRadius"
+            v-model.number="lentParams.frontRadius"
             min="-2594"
             max="113.3"
             step="0.05"
@@ -46,7 +46,7 @@
             <span class="range-max text-sm">113.3 mm</span>
           </div>
           <div class="text-md bg-gray-200 rounded-full px-3 py-1 font-semibold mt-1 inline-block">
-            {{ lensParams.frontRadius }} mm
+            {{ lentParams.frontRadius }} mm
           </div>
         </div>
 
@@ -55,7 +55,7 @@
           <input
             type="range"
             id="back-radius"
-            v-model.number="lensParams.backRadius"
+            v-model.number="lentParams.backRadius"
             min="-2594"
             max="113.3"
             step="0.1"
@@ -66,7 +66,7 @@
             <span class="range-max text-sm">113.3 mm</span>
           </div>
           <div class="text-md bg-gray-200 rounded-full px-3 py-1 font-semibold mt-1 inline-block">
-            {{ lensParams.backRadius }} mm
+            {{ lentParams.backRadius }} mm
           </div>
         </div>
       </div>
@@ -76,7 +76,7 @@
         <input
           type="range"
           id="thickness"
-          v-model.number="lensParams.thickness"
+          v-model.number="lentParams.thickness"
           min="0"
           max="100"
           step="0.1"
@@ -87,7 +87,7 @@
             <span class="range-max text-sm">100 mm</span>
           </div>
         <div class="text-md bg-gray-200 rounded-full px-3 py-1 font-semibold mt-1 inline-block">
-          {{ lensParams.thickness }} mm
+          {{ lentParams.thickness }} mm
         </div>
       </div>
     </form>
@@ -98,11 +98,11 @@
 import { mapActions, mapState } from 'vuex';
 
 export default {
-  name: "LensEditor",
+  name: "LentEditor",
   computed: {
-    ...mapState(['currentLens', 'reset']),
-    lensParams() {
-      return this.currentLens || {
+    ...mapState(['currentLent', 'reset']),
+    lentParams() {
+      return this.currentLent || {
         frontRadius: 0,
         backRadius: 0,
         thickness: 10,
@@ -114,31 +114,31 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['saveLens', 'updateLens', 'clearCurrentLens']),
-    submitLens() {
+    ...mapActions(['saveLent', 'updateLent', 'clearCurrentLent']),
+    submitLent() {
 
-      const trimmedTitle = this.lensParams.lensTitle.trim();
+      const trimmedTitle = this.lentParams.lensTitle.trim();
 
       if (trimmedTitle.length === 0) {
-        alert('Lens title cannot be empty.');
+        alert('Lent title cannot be empty.');
         return;
       }
 
-      const lensData = { ...this.lensParams };
+      const lentData = { ...this.lentParams };
       if (this.isEditing) {
-        this.updateLens(lensData);
+        this.updateLent(lentData);
       } else {
-        this.saveLens(lensData);
+        this.saveLent(lentData);
       }
     },
     cancelEdit() {
-      this.clearCurrentLens();
+      this.clearCurrentLent();
     }
   },
   watch: {
     reset(newValue) {
       if (newValue) {
-        this.clearCurrentLens();
+        this.clearCurrentLent();
       }
     }
   }
