@@ -2,7 +2,7 @@
   <div class="flex flex-col justify-center items-center gap-4">
     <svg width="600" height="300" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
 
-      <path :d="lensPath" fill="lightblue" stroke="#14576e" />
+      <path :d="lentPath" fill="lightblue" stroke="#14576e" />
       
 
       <line x1="20" y1="150" x2="580" y2="150" stroke="black" stroke-width="1" />
@@ -26,9 +26,9 @@
 import { mapState } from 'vuex';
 
 export default {
-  name: 'LensDisplay',
+  name: 'LentDisplay',
   computed: {
-    ...mapState(['currentLens']),
+    ...mapState(['currentLent']),
 
     focalXPosition() {
       return (focalLengthValue) => {
@@ -40,20 +40,20 @@ export default {
       };
     },
 
-    lensPath() {
+    lentPath() {
       const viewBoxHeight = 300;
-      const lensHeight = 150;
+      const lentHeight = 150;
       const centerY = viewBoxHeight / 2;
-      const thickness = this.currentLens.thickness;
+      const thickness = this.currentLent.thickness;
 
       const frontSurfaceCenterX = 300 - thickness / 2;
       const backSurfaceCenterX = 300 + thickness / 2;
 
-      const topY = centerY - lensHeight / 2;
-      const bottomY = centerY + lensHeight / 2;
+      const topY = centerY - lentHeight / 2;
+      const bottomY = centerY + lentHeight / 2;
 
-      const frontControlX = frontSurfaceCenterX - this.currentLens.frontRadius;
-      const backControlX = backSurfaceCenterX + this.currentLens.backRadius;
+      const frontControlX = frontSurfaceCenterX - this.currentLent.frontRadius;
+      const backControlX = backSurfaceCenterX + this.currentLent.backRadius;
 
       return `
         M${frontSurfaceCenterX},${topY}
@@ -65,12 +65,12 @@ export default {
 
     focalLength() {
       const n = 1.5;
-      const R1 = this.currentLens.frontRadius;
-      const R2 = -this.currentLens.backRadius;
-      const d = this.currentLens.thickness;
+      const R1 = this.currentLent.frontRadius;
+      const R2 = -this.currentLent.backRadius;
+      const d = this.currentLent.thickness;
 
-      const lensPower = (n - 1) * ((1 / R1) - (1 / R2) + ((n - 1) * d) / (n * R1 * R2));
-      const focalLength = lensPower !== 0 ? 1 / lensPower : 'Infinity';
+      const lentPower = (n - 1) * ((1 / R1) - (1 / R2) + ((n - 1) * d) / (n * R1 * R2));
+      const focalLength = lentPower !== 0 ? 1 / lentPower : 'Infinity';
 
       return isFinite(focalLength) ? focalLength.toFixed(2) : focalLength;
     },

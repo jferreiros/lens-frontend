@@ -9,18 +9,18 @@
       </div>
       <div class="flex justify-between gap-4 p-4 row-span-10">
         <div class="bg-white rounded-lg shadow-lg w-96"> 
-          <LensEditor
-            :editLens="currentLensParams"
+          <LentEditor
+            :editLens="currentLentParams"
             @parameters-changed="onParametersChanged"
-            @lens-saved="fetchLenses"
-            @lens-updated="fetchLenses"
+            @lent-saved="fetchLenses"
+            @lent-updated="fetchLenses"
           />
         </div>
         <div class="bg-white bg-opacity-75 rounded-lg p-4 shadow-lg flex-1 flex items-center justify-center">
-          <LensDisplay :lensParams="currentLensParams" />
+          <LentDisplay :lentParams="currentLentParams" />
         </div>
         <div class="bg-gray-100 rounded-lg shadow-lg w-72 overflow-hidden"> 
-          <LensList ref="lensList" @edit-lens="editLens" />
+          <LensList ref="lensList" @edit-lent="editLent" />
         </div>
       </div>
     </div>
@@ -30,22 +30,22 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
-import LensEditor from './components/LensEditor.vue';
-import LensDisplay from './components/LensDisplay.vue';
+import LentEditor from './components/LentEditor.vue';
+import LentDisplay from './components/LentDisplay.vue';
 import LensList from './components/LensList.vue';
 
 export default {
   name: 'App',
   components: {
-    LensEditor,
-    LensDisplay,
+    LentEditor,
+    LentDisplay,
     LensList
   },
   computed: {
-    ...mapState(['currentLens']),
+    ...mapState(['currentLent']),
   },
   methods: {
-    ...mapActions(['fetchLenses', 'clearCurrentLens']),
+    ...mapActions(['fetchLenses', 'clearCurrentLent']),
   },
   mounted() {
     this.fetchLenses();

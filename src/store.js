@@ -4,7 +4,7 @@ import axios from 'axios';
 export default createStore({
     state: {
         lenses: [],
-        currentLens: {
+        currentLent: {
             frontRadius: 0,
             backRadius: 0,
             thickness: 10,
@@ -16,12 +16,12 @@ export default createStore({
     SET_LENSES(state, lenses) {
       state.lenses = lenses;
     },
-    SET_CURRENT_LENS(state, lens) {
-      state.currentLens = lens;
+    SET_CURRENT_LENT(state, lent) {
+      state.currentLent = lent;
       state.reset = 0;
     },
     RESET_CURRENT_LENS(state) {
-      state.currentLens = {
+      state.currentLent = {
         frontRadius: 0,
         backRadius: 0,
         thickness: 10,
@@ -38,40 +38,40 @@ export default createStore({
         })
         .catch(error => console.error('Error fetching lenses:', error));
     },
-    selectLens({ commit }, lens) {
-      commit('SET_CURRENT_LENS', lens);
+    selectLens({ commit }, lent) {
+      commit('SET_CURRENT_LENT', lent);
     },
-    clearCurrentLens({ commit }) {
-      commit('RESET_CURRENT_LENS');
+    clearCurrentLent({ commit }) {
+      commit('RESET_CURRENT_LENT');
     },
-    saveLens({ dispatch }, lensParams) {
+    saveLent({ dispatch }, lensParams) {
       axios.post('https://2tabw4hbkd.execute-api.eu-west-1.amazonaws.com/prod/lenses', lensParams)
         .then(() => {
           dispatch('fetchLenses');
           alert("Lens configuration saved successfully!");
-          dispatch('clearCurrentLens');
+          dispatch('clearCurrentLent');
         })
         .catch(error => {
-          console.error("There was an error saving the lens:", error);
+          console.error("There was an error saving the lent:", error);
           alert("Failed to save lens configuration.");
         });
     },
-    updateLens({ dispatch }, lensParams) {
+    updateLent({ dispatch }, lensParams) {
       axios.put(`https://2tabw4hbkd.execute-api.eu-west-1.amazonaws.com/prod/lenses`, lensParams)
         .then(() => {
           dispatch('fetchLenses');
-          alert("Lens configuration updated successfully!");
-          dispatch('clearCurrentLens');
+          alert("Lent configuration updated successfully!");
+          dispatch('clearCurrentLent');
         })
         .catch(error => {
-          console.error("There was an error updating the lens:", error);
+          console.error("There was an error updating the lent:", error);
           alert("Failed to update lens configuration.");
         });
     },
-    deleteLens({ dispatch }, lensId) {
-      axios.delete(`https://2tabw4hbkd.execute-api.eu-west-1.amazonaws.com/prod/lenses/${lensId}`)
+    deleteLens({ dispatch }, lentId) {
+      axios.delete(`https://2tabw4hbkd.execute-api.eu-west-1.amazonaws.com/prod/lenses/${lentId}`)
         .then(() => dispatch('fetchLenses'))
-        .catch(error => console.error('Error deleting lens:', error));
+        .catch(error => console.error('Error deleting lent:', error));
     },
   },
 });

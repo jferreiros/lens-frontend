@@ -6,19 +6,19 @@
         Error: {{ error }}
       </div>
       <div v-if="lenses.length > 0" class="flex flex-col gap-4">
-        <div v-for="lens in lenses" :key="lens.id" class="bg-white shadow-lg rounded-md p-2">          
+        <div v-for="lent in lenses" :key="lent.id" class="bg-white shadow-lg rounded-md p-2">          
           <div class="grid grid-cols-3">
             <div class="col-span-2 flex flex-col gap-2">
-              <div class="font-bold text-md">{{ lens.lensTitle }}</div>
+              <div class="font-bold text-md">{{ lent.lensTitle }}</div>
               <div class="text-xs">
-                <div><span class="font-bold">F: </span>{{ lens.frontRadius }} mm</div>
-                <div><span class="font-bold">B: </span>{{ lens.backRadius }} mm</div>
-                <div><span class="font-bold">T: </span>{{ lens.thickness }} mm</div>
+                <div><span class="font-bold">F: </span>{{ lent.frontRadius }} mm</div>
+                <div><span class="font-bold">B: </span>{{ lent.backRadius }} mm</div>
+                <div><span class="font-bold">T: </span>{{ lent.thickness }} mm</div>
               </div>
             </div>              
             <div class="col-span-1 flex flex-col gap-2 justify-center items-end">
-              <button @click="selectLens(lens)" class="p-2 bg-gray-200 rounded-md hover:bg-blue-400 hover:text-white focus:bg-blue-700"><font-awesome-icon icon="edit" /></button>
-              <button @click="confirmDelete(lens.id)" class="p-2 bg-gray-200 rounded-md hover:bg-red-400 hover:text-white focus:bg-red-700"><font-awesome-icon icon="trash-alt" /></button>
+              <button @click="selectLens(lent)" class="p-2 bg-gray-200 rounded-md hover:bg-blue-400 hover:text-white focus:bg-blue-700"><font-awesome-icon icon="edit" /></button>
+              <button @click="confirmDelete(lent.id)" class="p-2 bg-gray-200 rounded-md hover:bg-red-400 hover:text-white focus:bg-red-700"><font-awesome-icon icon="trash-alt" /></button>
             </div>
           </div>  
         </div>
@@ -44,10 +44,10 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['fetchLenses', 'selectLens', 'deleteLens']),
-    confirmDelete(lensId) {
-      if (confirm("Are you sure you want to delete this lens configuration?")) {
-        this.deleteLens(lensId);
+    ...mapActions(['fetchLenses', 'selectLens', 'deleteLent']),
+    confirmDelete(lentId) {
+      if (confirm("Are you sure you want to delete this lent configuration?")) {
+        this.deleteLens(lentId);
       }
     },
     handleError(error) {

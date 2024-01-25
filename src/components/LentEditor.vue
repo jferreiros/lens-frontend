@@ -1,6 +1,6 @@
 <template>
   <div class="bg-opacity-75 rounded-lg w-full overflow-hidden">
-    <h2 class="text-white font-bold text-lg bg-red-600 p-4">Lens Parameters</h2>
+    <h2 class="text-white font-bold text-lg bg-red-600 p-4">Lent Parameters</h2>
     
     <form @submit.prevent="submitLens" class="p-4 flex flex-col gap-2">
       <div class="grid grid-cols-3 gap-2">
@@ -12,7 +12,7 @@
             v-model="lensParams.lensTitle"
             :class="{'bg-lightblue': isEditing}"
             class="w-full px-3 py-2 border rounded mt-1"
-            placeholder="Enter lens title"
+            placeholder="Enter lent title"
           />
         </div>
         <div class="flex col-span-1 items-end gap-1">
