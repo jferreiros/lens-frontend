@@ -17,7 +17,7 @@
               </div>
             </div>              
             <div class="col-span-1 flex flex-col gap-2 justify-center items-end">
-              <button @click="selectLens(lent)" class="p-2 bg-gray-200 rounded-md hover:bg-blue-400 hover:text-white focus:bg-blue-700"><font-awesome-icon icon="edit" /></button>
+              <button @click="selectLent(lent)" class="p-2 bg-gray-200 rounded-md hover:bg-blue-400 hover:text-white focus:bg-blue-700"><font-awesome-icon icon="edit" /></button>
               <button @click="confirmDelete(lent.id)" class="p-2 bg-gray-200 rounded-md hover:bg-red-400 hover:text-white focus:bg-red-700"><font-awesome-icon icon="trash-alt" /></button>
             </div>
           </div>  
@@ -44,10 +44,10 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['fetchLenses', 'selectLens', 'deleteLent']),
+    ...mapActions(['fetchLenses', 'selectLent', 'deleteLent']),
     confirmDelete(lentId) {
       if (confirm("Are you sure you want to delete this lent configuration?")) {
-        this.deleteLens(lentId);
+        this.deleteLent(lentId);
       }
     },
     handleError(error) {

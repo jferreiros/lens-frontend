@@ -38,7 +38,7 @@ export default createStore({
         })
         .catch(error => console.error('Error fetching lenses:', error));
     },
-    selectLens({ commit }, lent) {
+    selectLent({ commit }, lent) {
       commit('SET_CURRENT_LENT', lent);
     },
     clearCurrentLent({ commit }) {
@@ -68,7 +68,7 @@ export default createStore({
           alert("Failed to update lens configuration.");
         });
     },
-    deleteLens({ dispatch }, lentId) {
+    deleteLent({ dispatch }, lentId) {
       axios.delete(`https://2tabw4hbkd.execute-api.eu-west-1.amazonaws.com/prod/lenses/${lentId}`)
         .then(() => dispatch('fetchLenses'))
         .catch(error => console.error('Error deleting lent:', error));
