@@ -126,13 +126,6 @@ export default {
         // Reset logic when the reset state changes
         this.clearCurrentLens();
       }
-    },
-    currentLens(newValue) {
-      if (!newValue) {
-        // Logic to handle when the current lens is cleared
-        this.isEditing = false;
-        this.lensParams = this.defaultLensParams();
-      }
     }
   }
 };
