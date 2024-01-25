@@ -4,18 +4,31 @@
     
     <form @submit.prevent="isEditing ? updateLens() : saveLens()" class="p-4 flex flex-col gap-2">
       <!-- Lens Configuration Title -->
-      <div class="mt-4 text-left">
-        <label for="lens-title" class="text-sm font-bold"
-          >Lens Configuration Title:</label
-        >
-        <input
-          type="text"
-          id="lens-title"
-          v-model="lensParams.lensTitle"
-          :class="{'bg-lightblue': isEditing}"
-          class="w-full px-3 py-2 border rounded mt-1"
-          placeholder="Enter lens title"
-        />
+      <div class="grid grid-cols-3 gap-2">
+        <div class="text-left col-span-2">
+          <label for="lens-title" class="text-sm font-bold"
+            >Title:</label
+          >
+          <input
+            type="text"
+            id="lens-title"
+            v-model="lensParams.lensTitle"
+            :class="{'bg-lightblue': isEditing}"
+            class="w-full px-3 py-2 border rounded mt-1"
+            placeholder="Enter lens title"
+          />
+        </div>
+        <div class="flex col-span-1">
+          <button
+            type="submit"
+            class=" px-4 py-2 bg-blue-600 text-white font-bold rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300"
+          >
+            {{ isEditing ? 'Update' : 'Save' }}
+          </button>
+          <button v-if="isEditing" @click="cancelEdit" class="mt-2 w-full px-6 py-2 bg-red-600 text-white font-bold rounded hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-300">
+            Cancel
+          </button>
+        </div>
       </div>
       <h3 class="text-gray-900 font-bold text-center">Radius of curvature (mm)</h3>
       <div class="flex flex-col gap-2">
@@ -89,17 +102,7 @@
         </div>
       </div>
 
-      <div class="mt-6">
-        <button
-          type="submit"
-          class="w-full px-6 py-2 bg-blue-600 text-white font-bold rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300"
-        >
-          {{ isEditing ? 'Update' : 'Save' }}
-        </button>
-        <button v-if="isEditing" @click="cancelEdit" class="mt-2 w-full px-6 py-2 bg-red-600 text-white font-bold rounded hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-300">
-          Cancel
-        </button>
-      </div>
+
     </form>
   </div>
 </template>
