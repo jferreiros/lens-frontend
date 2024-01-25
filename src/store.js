@@ -10,6 +10,7 @@ export default createStore({
             thickness: 10,
             lensTitle: ""
         },
+        reset: 0
   },
   mutations: {
     SET_LENSES(state, lenses) {
@@ -17,14 +18,16 @@ export default createStore({
     },
     SET_CURRENT_LENS(state, lens) {
       state.currentLens = lens;
+      state.reset = 0;
     },
     RESET_CURRENT_LENS(state) {
       state.currentLens = {
         frontRadius: 0,
         backRadius: 0,
-        thickness: 10,
+        thickness: 0,
         lensTitle: "",
       };
+      state.reset = 1;
     },
   },
   actions: {

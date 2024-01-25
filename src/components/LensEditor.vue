@@ -23,7 +23,7 @@
           >
             {{ isEditing ? 'Update' : 'Save' }}
           </button>
-          <button v-if="isEditing" @click="cancelEdit" class="px-2 py-1 bg-red-600 text-white font-bold rounded hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-300">
+          <button v-if="isEditing" @click.prevent="cancelEdit" class="px-2 py-1 bg-red-600 text-white font-bold rounded hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-300">
             <font-awesome-icon icon="fa-times-circle" />
           </button>
         </div>
@@ -93,7 +93,7 @@ import { mapActions, mapState } from 'vuex';
 export default {
   name: "LensEditor",
   computed: {
-    ...mapState(['currentLens']),
+    ...mapState(['currentLens', 'reset']),
     lensParams() {
       return this.currentLens || {
         frontRadius: 0,
@@ -103,7 +103,7 @@ export default {
       };
     },
     isEditing() {
-      return this.currentLens !== null;
+      return this.reset;
     }
   },
   methods: {
