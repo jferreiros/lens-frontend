@@ -49,6 +49,7 @@ export default createStore({
         .then(() => {
           dispatch('fetchLenses');
           alert("Lens configuration saved successfully!");
+          dispatch('clearCurrentLens');
         })
         .catch(error => {
           console.error("There was an error saving the lens:", error);
@@ -60,6 +61,7 @@ export default createStore({
         .then(() => {
           dispatch('fetchLenses');
           alert("Lens configuration updated successfully!");
+          dispatch('clearCurrentLens');
         })
         .catch(error => {
           console.error("There was an error updating the lens:", error);
