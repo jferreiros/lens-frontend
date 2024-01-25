@@ -10,7 +10,7 @@ export default createStore({
             thickness: 10,
             lensTitle: ""
         },
-        reset: 0
+        reset: 1
   },
   mutations: {
     SET_LENSES(state, lenses) {
