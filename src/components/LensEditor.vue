@@ -121,7 +121,7 @@ export default {
 
       // Make sure to replace 'YOUR_LAMBDA_ENDPOINT_URL' with the actual endpoint
       axios
-        .post("https://8mxhkm4s12.execute-api.eu-west-1.amazonaws.com/prod/lenses", this.lensParams)
+        .post("https://2tabw4hbkd.execute-api.eu-west-1.amazonaws.com/prod/lenses", this.lensParams)
         .then((response) => {
           console.log("Lens saved!", response);
         })

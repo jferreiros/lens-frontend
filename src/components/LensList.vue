@@ -1,6 +1,6 @@
 <template>
     <div class="lens-list">
-      <h2 class="font-bold text-lg bg-gray-800 text-white p-4">Saved Lens Configurations</h2>
+      <h2 class="font-bold text-md bg-gray-800 text-white p-4">Saved Lens Configurations</h2>
       <div class="flex flex-col gap-4 p-4">
         <div v-if="error" class="error-message bg-red-300 text-red-950 font-bold text-sm rounded-md p-2">
         Error: {{ error }}
@@ -21,7 +21,7 @@
             </div>
           </div>
         </div>
-        <div v-else>
+        <div v-else class="bg-blue-300 text-blue-950 font-bold text-sm rounded-md p-2">
           No saved configurations found.
         </div>
         <div class="flex flex-col gap-4">
@@ -62,7 +62,7 @@
     methods: {
       async fetchLenses() {
         try {
-          const response = await axios.get('https://8mxhkm4s12.execute-api.eu-west-1.amazonaws.com/prod/lenses');
+          const response = await axios.get('https://2tabw4hbkd.execute-api.eu-west-1.amazonaws.com/prod/lenses');
           this.lenses = response.data;
         } catch (err) {
           this.handleError(err);

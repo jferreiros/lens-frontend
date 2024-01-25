@@ -1,13 +1,17 @@
 <template>
     <div class="flex flex-col justify-center items-center gap-4">
-        <svg width="600" height="300" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+      <svg width="600" height="300" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
       <!-- Lens curves -->
-      <path :d="lensPath" fill="transparent" stroke="black" />
+      <path :d="lensPath" fill="lightblue" stroke="#14576e" />
       
      
     <!-- Centered horizontal and vertical lines -->
     <line x1="20" y1="150" x2="580" y2="150" stroke="black" stroke-width="1" />
     <line x1="300" y1="10" x2="300" y2="290" stroke="black" stroke-width="1" />
+    <line x1="20" y1="100" x2="300" y2="100" stroke="red" stroke-width="1" />
+    <line v-if="focalLength" x1="300" y1="100" :x2="focalXPosition(focalLength)" y2="150" stroke="red" stroke-width="1" />
+
+
 
     <!-- Labels for the horizontal line ends -->
     <text x="20" y="170" font-family="Verdana" font-size="10" text-anchor="start">-1000 mm</text>
@@ -20,7 +24,7 @@
     <!-- Focal length text -->
     
     </svg>
-    <span font-family="Verdana" font-size="14" text-anchor="middle" class="p-4 bg-white rounded-md">
+    <span font-family="Verdana" font-size="14" text-anchor="middle" class="p-4 bg-blue-100 rounded-md">
       Focal Length: <span class="font-bold">{{ focalLength }} mm</span>
     </span>
     </div>

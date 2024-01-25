@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen w-full bg-gray-200 flex justify-center">
     <div class="max-w-10xl w-full mx-auto">
-      <div class="w-full text-center bg-gray-950 p-4">      
+      <div class="w-full text-center bg-gray-950 pr-4 pl-4 pt-2 pb-2">      
         <img src="./assets/images/logomeetoptics.png" alt="">
       </div>
       <div class="bg-white w-full p-6 text-xl font-bold text-left">
