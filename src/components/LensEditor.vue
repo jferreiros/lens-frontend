@@ -2,13 +2,11 @@
   <div class="bg-opacity-75 rounded-lg w-full overflow-hidden">
     <h2 class="text-white font-bold text-lg bg-red-600 p-4">Lens Parameters</h2>
     
-    <form @submit.prevent="isEditing ? updateLens() : saveLens()" class="p-4 flex flex-col gap-2">
+    <form @submit.prevent="submitLens" class="p-4 flex flex-col gap-2">
       <!-- Lens Configuration Title -->
       <div class="grid grid-cols-3 gap-2">
         <div class="text-left col-span-2">
-          <label for="lens-title" class="text-sm font-bold"
-            >Title:</label
-          >
+          <label for="lens-title" class="text-sm font-bold">Title:</label>
           <input
             type="text"
             id="lens-title"
@@ -21,7 +19,7 @@
         <div class="flex col-span-1 items-end gap-1">
           <button
             type="submit"
-            class=" px-4 py-2 bg-blue-600 text-white text-xs font-bold rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300"
+            class="px-4 py-2 bg-blue-600 text-white text-xs font-bold rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300"
           >
             {{ isEditing ? 'Update' : 'Save' }}
           </button>
@@ -30,60 +28,46 @@
           </button>
         </div>
       </div>
-      <h3 class="text-gray-900 font-bold text-center">Radius of curvature (mm)</h3>
+      
+      <!-- Radius of Curvature -->
+      <h3 class="text-gray-900 font-bold text-center">Radius of Curvature (mm)</h3>
       <div class="flex flex-col gap-2">
+        <!-- Front Radius -->
         <div class="text-left border border-gray-300 rounded-lg p-2">
-          <label class="block text-sm font-bold" for="front-radius"
-            >Front:</label
-          >
-          
-
-            <input
-              type="range"
-              id="front-radius"
-              v-model.number="lensParams.frontRadius"
-              min="-2594"
-              max="113.3"
-              step="0.05"
-              class="w-full mt-1"
-            />
-            <div class="w-full flex justify-between">
-            <span class="range-min text-sm">-2594 mm</span>
-            <span class="range-max text-sm">113.3 mm</span>
-          </div>
-
-          <div
-            class="text-md bg-gray-200 rounded-full px-3 py-1 font-semibold mt-1 inline-block"
-          >
+          <label class="block text-sm font-bold" for="front-radius">Front:</label>
+          <input
+            type="range"
+            id="front-radius"
+            v-model.number="lensParams.frontRadius"
+            min="-2594"
+            max="113.3"
+            step="0.05"
+            class="w-full mt-1"
+          />
+          <div class="text-md bg-gray-200 rounded-full px-3 py-1 font-semibold mt-1 inline-block">
             {{ lensParams.frontRadius }} mm
           </div>
         </div>
 
+        <!-- Back Radius -->
         <div class="text-left border border-gray-300 rounded-lg p-2">
           <label class="block text-sm font-bold" for="back-radius">Back:</label>
-          
-            <input
-              type="range"
-              id="back-radius"
-              v-model.number="lensParams.backRadius"
-              min="-2594"
-              max="113.3"
-              step="0.1"
-              class="w-full mt-1"
-            />
-            <div class="w-full flex justify-between">
-            <span class="range-min text-sm">-2594 mm</span>
-            <span class="range-max text-sm">113.3 mm</span>
-            </div>
-
-          <div
-            class="text-md bg-gray-200 rounded-full px-3 py-1 font-semibold mt-1 inline-block"
-          >
+          <input
+            type="range"
+            id="back-radius"
+            v-model.number="lensParams.backRadius"
+            min="-2594"
+            max="113.3"
+            step="0.1"
+            class="w-full mt-1"
+          />
+          <div class="text-md bg-gray-200 rounded-full px-3 py-1 font-semibold mt-1 inline-block">
             {{ lensParams.backRadius }} mm
           </div>
         </div>
       </div>
 
+      <!-- Thickness -->
       <div class="text-left">
         <h3 class="text-black font-bold text-center">Thickness (mm):</h3>
         <input
@@ -95,112 +79,50 @@
           step="0.1"
           class="w-full mt-1"
         />
-        <div
-          class="text-md bg-gray-200 rounded-full px-3 py-1 font-semibold mt-1 inline-block"
-        >
+        <div class="text-md bg-gray-200 rounded-full px-3 py-1 font-semibold mt-1 inline-block">
           {{ lensParams.thickness }} mm
         </div>
       </div>
-
-
     </form>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+import { mapActions, mapState } from 'vuex';
 
 export default {
   name: "LensEditor",
-  props: {
-    editLens: Object,
-  },
-  data() {
-    return {
-      lensParams: {
+  computed: {
+    ...mapState(['currentLens']),
+    lensParams() {
+      return this.currentLens || {
         frontRadius: 0,
         backRadius: 0,
         thickness: 10,
-        lensTitle: "",
-      },
-      isEditing: false,
-    };
+        lensTitle: ""
+      };
+    },
+    isEditing() {
+      return this.currentLens !== null;
+    }
   },
   methods: {
-    saveLens() {
-      // Emit an event with the current parameters
-      this.$emit("save-lens", this.lensParams);
-
-      // Make sure to replace 'YOUR_LAMBDA_ENDPOINT_URL' with the actual endpoint
-      axios
-        .post("https://2tabw4hbkd.execute-api.eu-west-1.amazonaws.com/prod/lenses", this.lensParams)
-        .then((response) => {
-          console.log("Lens saved!", response);
-          alert("Lens configuration saved successfully!");
-          // Emit event to notify parent component about the save
-          this.$emit("lens-saved");
-          this.resetForm();
-        })
-        .catch((error) => {
-          console.error("There was an error saving the lens:", error);
-          alert("Failed to save lens configuration.");
-        });
+    ...mapActions(['saveLens', 'updateLens', 'clearCurrentLens']),
+    submitLens() {
+      const lensData = { ...this.lensParams };
+      if (this.isEditing) {
+        this.updateLens(lensData);
+      } else {
+        this.saveLens(lensData);
+      }
     },
-    async updateLens() {
-    try {
-      // Include the lens ID in the body of the PUT request
-      const updatedLens = {
-        id: this.lensParams.id,
-        frontRadius: this.lensParams.frontRadius,
-        backRadius: this.lensParams.backRadius,
-        thickness: this.lensParams.thickness,
-        lensTitle: this.lensParams.lensTitle
-      };
-
-      const response = await axios.put(`https://2tabw4hbkd.execute-api.eu-west-1.amazonaws.com/prod/lenses`, updatedLens);
-      
-      console.log("Lens updated!", response);
-      
-      // Emit event to notify parent component about the update
-      this.$emit("lens-updated");
-      
-      // Optional: Show a success message to the user
-      alert("Lens configuration updated successfully!");
-
-      // Reset form and exit edit mode
-      this.isEditing = false;
-      this.resetForm();
-      this.$parent.resetEditing();
-    } catch (error) {
-      console.error("There was an error updating the lens:", error);
-      
-      // Optional: Show an error message to the user
-      alert("Failed to update lens configuration.");
-    }
-  },
     cancelEdit() {
-      // Reset the form and exit edit mode
-      this.isEditing = false;
-      this.resetForm();
-      this.$parent.resetEditing();
-    },
-    resetForm() {
-      this.lensParams = { frontRadius: 0, backRadius: 0, thickness: 10, lensTitle: "" };
+      this.clearCurrentLens();
     }
-  },
-  watch: {
-    editLens: {
-      handler(newLens) {
-        this.lensParams = { ...newLens };
-        this.isEditing = true;
-      },
-      immediate: true,
-      deep: true
-    }
-  },
+  }
 };
 </script>
 
 <style scoped>
-/* Additional styles if needed */
+/* Your existing styles, if any */
 </style>

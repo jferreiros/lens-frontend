@@ -29,9 +29,10 @@
 
 
 <script>
-import LensEditor from './components/LensEditor.vue'
-import LensDisplay from './components/LensDisplay.vue'
-import LensList from './components/LensList.vue'
+import { mapActions, mapState } from 'vuex';
+import LensEditor from './components/LensEditor.vue';
+import LensDisplay from './components/LensDisplay.vue';
+import LensList from './components/LensList.vue';
 
 export default {
   name: 'App',
@@ -40,42 +41,16 @@ export default {
     LensDisplay,
     LensList
   },
-  data() {
-    return {
-      currentLensParams: {
-        frontRadius: 0,
-        backRadius: 0,
-        thickness: 10,
-        lensTitle: ""
-      },
-      editingLensId: null // Add this to track the editing lens ID
-    };
+  computed: {
+    ...mapState(['currentLens']),
   },
   methods: {
-    editLens(lens) {
-      this.currentLensParams = {...lens};
-      this.editingLensId = lens.id; // Set the editing lens ID
-    },
-    onParametersChanged(parameters) {
-      if (!this.editingLensId) {
-        this.currentLensParams = parameters; // Update only if not editing
-      }
-    },
-    fetchLenses() {
-      this.resetEditing();
-      this.$refs.lensList.fetchLenses();
-    },
-    resetEditing() {
-      this.editingLensId = null;
-      // this.currentLensParams = {
-      //   frontRadius: 0,
-      //   backRadius: 0,
-      //   thickness: 10,
-      //   lensTitle: ""
-      // };
-    }
+    ...mapActions(['fetchLenses', 'clearCurrentLens']),
+  },
+  mounted() {
+    this.fetchLenses();
   }
-}
+};
 </script>
 
 <style>
