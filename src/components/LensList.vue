@@ -9,7 +9,7 @@
           <div v-for="lens in lenses" :key="lens.id" class="bg-white shadow-lg rounded-md p-2">
             <div>
               <div class="font-bold text-md">{{ lens.lensTitle }}</div>
-              <div class="flex gap-2 text-sm">
+              <div class="flex gap-2 text-xs">
                 <div><span class="font-bold">F: </span>{{ lens.frontRadius }} mm</div>
                 <div><span class="font-bold">B: </span>{{ lens.backRadius }} mm</div>
                 <div><span class="font-bold">T: </span>{{ lens.thickness }} mm</div>

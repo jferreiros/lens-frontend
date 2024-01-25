@@ -9,7 +9,12 @@
       </div>
       <div class="flex justify-between gap-4 p-4">
         <div class="bg-white rounded-lg shadow-lg w-96"> <!-- 300px width -->
-          <LensEditor @parameters-changed="onParametersChanged" @lens-saved="fetchLenses" @lens-updated="fetchLenses" />
+          <LensEditor
+            :editLens="currentLensParams"
+            @parameters-changed="onParametersChanged"
+            @lens-saved="fetchLenses"
+            @lens-updated="fetchLenses"
+          />
         </div>
         <div class="bg-white bg-opacity-75 rounded-lg p-4 shadow-lg flex-1 flex items-center justify-center">
           <LensDisplay :lensParams="currentLensParams" />
@@ -58,6 +63,7 @@ export default {
     },
     fetchLenses() {
       this.$refs.lensList.fetchLenses();
+      this.resetEditing();
     },
     resetEditing() {
       this.editingLensId = null;

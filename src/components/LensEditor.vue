@@ -189,13 +189,15 @@ export default {
     }
   },
   watch: {
-    lensParams: {
-      handler(newVal) {
-        this.$emit("parameters-changed", newVal);
+    editLens: {
+      handler(newLens) {
+        this.lensParams = { ...newLens };
+        this.isEditing = true;
       },
+      immediate: true,
       deep: true
     }
-  }
+  },
 };
 </script>
 
