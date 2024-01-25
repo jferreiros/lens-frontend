@@ -17,7 +17,7 @@
             </div>
             <div class="flex gap-2 justify-end">
               <button @click="selectLens(lens)"><font-awesome-icon icon="edit" /></button>
-              <button><font-awesome-icon icon="trash-alt" /></button>
+              <button @click="confirmDelete(lens.id)"><font-awesome-icon icon="trash-alt" /></button>
             </div>
           </div>
         </div>
@@ -75,6 +75,19 @@
         // A real-world application should have more sophisticated error handling
         this.error = error.message || 'An unexpected error occurred';
         // Optionally log to an external service
+      },
+      confirmDelete(lensId) {
+        if (confirm("Are you sure you want to delete this lens configuration?")) {
+          this.deleteLens(lensId);
+        }
+      },
+      async deleteLens(lensId) {
+        try {
+          await axios.delete(`https://2tabw4hbkd.execute-api.eu-west-1.amazonaws.com/prod/lenses/${lensId}`);
+          this.fetchLenses(); // Refresh the list after deletion
+        } catch (error) {
+          this.handleError(error);
+        }
       },
     },
   };
