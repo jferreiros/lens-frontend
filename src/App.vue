@@ -1,14 +1,14 @@
 <template>
   <div class="min-h-screen w-full bg-gray-200 flex justify-center">
-    <div class="max-w-10xl w-full mx-auto">
-      <div class="w-full text-center bg-gray-950 pr-4 pl-4 pt-2 pb-2">      
+    <div class="max-w-10xl w-full mx-auto grid grid-rows-12 max-h-screen overflow-hidden">
+      <div class="w-full text-center bg-gray-950 pr-4 pl-4 pt-2 pb-2 row-span-1">      
         <img src="./assets/images/logomeetoptics.png" alt="">
       </div>
-      <div class="bg-white w-full p-6 text-xl font-bold text-left">
+      <div class="bg-white w-full p-6 text-xl font-bold text-left row-span-1">
         Custom Lent builder
       </div>
-      <div class="flex justify-between gap-4 p-4">
-        <div class="bg-white rounded-lg shadow-lg w-96"> <!-- 300px width -->
+      <div class="flex justify-between gap-4 p-4 row-span-10">
+        <div class="bg-white rounded-lg shadow-lg w-96"> 
           <LensEditor
             :editLens="currentLensParams"
             @parameters-changed="onParametersChanged"
@@ -19,7 +19,7 @@
         <div class="bg-white bg-opacity-75 rounded-lg p-4 shadow-lg flex-1 flex items-center justify-center">
           <LensDisplay :lensParams="currentLensParams" />
         </div>
-        <div class="bg-gray-100 rounded-lg overflow-hidden shadow-lg w-72"> <!-- 300px width -->
+        <div class="bg-gray-100 rounded-lg shadow-lg w-72 overflow-hidden"> 
           <LensList ref="lensList" @edit-lens="editLens" />
         </div>
       </div>
