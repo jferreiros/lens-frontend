@@ -24,7 +24,7 @@ export default createStore({
       state.currentLens = {
         frontRadius: 0,
         backRadius: 0,
-        thickness: 0,
+        thickness: 10,
         lensTitle: "",
       };
       state.reset = 1;

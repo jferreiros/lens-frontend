@@ -103,7 +103,7 @@ export default {
       };
     },
     isEditing() {
-      return this.reset;
+      return !this.reset;
     }
   },
   methods: {
