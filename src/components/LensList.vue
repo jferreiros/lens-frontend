@@ -24,22 +24,6 @@
         <div v-else class="bg-blue-300 text-blue-950 font-bold text-sm rounded-md p-2">
           No saved configurations found.
         </div>
-        <div class="flex flex-col gap-4">
-          <div class="bg-white shadow-lg rounded-md p-2">
-            <div>
-              <div class="font-bold text-md">Titulo del lente</div>
-              <div class="flex gap-2 text-sm">
-                <div><span class="font-bold">F: </span>75 mm</div>
-                <div><span class="font-bold">B: </span>8,5 mm</div>
-                <div><span class="font-bold">T: </span>10 mm</div>
-              </div>
-            </div>
-            <div class="flex gap-2 justify-end">
-              <button><font-awesome-icon icon="edit" /></button>
-              <button><font-awesome-icon icon="trash-alt" /></button>
-            </div>
-          </div>
-        </div>
       </div>
       
     </div>
