@@ -43,8 +43,8 @@ export default {
   data() {
     return {
       currentLensParams: {
-        frontRadius: 50,
-        backRadius: 50,
+        frontRadius: 0,
+        backRadius: 0,
         thickness: 10,
         lensTitle: ""
       },
@@ -62,17 +62,17 @@ export default {
       }
     },
     fetchLenses() {
-      this.$refs.lensList.fetchLenses();
       this.resetEditing();
+      this.$refs.lensList.fetchLenses();
     },
     resetEditing() {
       this.editingLensId = null;
-      this.currentLensParams = {
-        frontRadius: 50,
-        backRadius: 50,
-        thickness: 10,
-        lensTitle: ""
-      };
+      // this.currentLensParams = {
+      //   frontRadius: 0,
+      //   backRadius: 0,
+      //   thickness: 10,
+      //   lensTitle: ""
+      // };
     }
   }
 }
