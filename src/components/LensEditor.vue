@@ -81,7 +81,7 @@
         <input
           type="text"
           id="lens-title"
-          v-model="lensTitle"
+          v-model="lensParams.lensTitle"
           class="w-full px-3 py-2 border rounded mt-1"
           placeholder="Enter lens title"
         />
