@@ -139,6 +139,7 @@ export default {
           alert("Lens configuration saved successfully!");
           // Emit event to notify parent component about the save
           this.$emit("lens-saved");
+          this.resetForm();
         })
         .catch((error) => {
           console.error("There was an error saving the lens:", error);
@@ -169,6 +170,7 @@ export default {
       // Reset form and exit edit mode
       this.isEditing = false;
       this.resetForm();
+      this.$parent.resetEditing();
     } catch (error) {
       console.error("There was an error updating the lens:", error);
       
@@ -180,20 +182,18 @@ export default {
       // Reset the form and exit edit mode
       this.isEditing = false;
       this.resetForm();
+      this.$parent.resetEditing();
     },
     resetForm() {
       this.lensParams = { frontRadius: 0, backRadius: 0, thickness: 10, lensTitle: "" };
     }
   },
   watch: {
-    editLens: {
-      immediate: true,
+    lensParams: {
       handler(newVal) {
-        if (newVal) {
-          this.lensParams = { ...newVal };
-          this.isEditing = true;
-        }
-      }
+        this.$emit("parameters-changed", newVal);
+      },
+      deep: true
     }
   }
 };

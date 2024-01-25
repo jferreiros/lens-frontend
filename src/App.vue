@@ -9,7 +9,7 @@
       </div>
       <div class="flex justify-between gap-4 p-4">
         <div class="bg-white rounded-lg shadow-lg w-96"> <!-- 300px width -->
-          <LensEditor @lens-saved="fetchLenses" @lens-updated="fetchLenses" />
+          <LensEditor @parameters-changed="onParametersChanged" @lens-saved="fetchLenses" @lens-updated="fetchLenses" />
         </div>
         <div class="bg-white bg-opacity-75 rounded-lg p-4 shadow-lg flex-1 flex items-center justify-center">
           <LensDisplay :lensParams="currentLensParams" />
@@ -38,22 +38,36 @@ export default {
   data() {
     return {
       currentLensParams: {
-        frontRadius: 50, // default values
-        backRadius: 50,  // default values
-        thickness: 10    // default values
-      }
+        frontRadius: 50,
+        backRadius: 50,
+        thickness: 10,
+        lensTitle: ""
+      },
+      editingLensId: null // Add this to track the editing lens ID
     };
   },
   methods: {
-    updateLens(parameters) {
-      this.currentLensParams = parameters;
-    },
     editLens(lens) {
-      this.currentLensParams = lens;
+      this.currentLensParams = {...lens};
+      this.editingLensId = lens.id; // Set the editing lens ID
+    },
+    onParametersChanged(parameters) {
+      if (!this.editingLensId) {
+        this.currentLensParams = parameters; // Update only if not editing
+      }
     },
     fetchLenses() {
       this.$refs.lensList.fetchLenses();
     },
+    resetEditing() {
+      this.editingLensId = null;
+      this.currentLensParams = {
+        frontRadius: 50,
+        backRadius: 50,
+        thickness: 10,
+        lensTitle: ""
+      };
+    }
   }
 }
 </script>
