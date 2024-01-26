@@ -14,7 +14,6 @@
       <text x="580" y="170" font-family="Verdana" font-size="10" text-anchor="end">1000 mm</text>
 
       <circle v-if="focalLength" :cx="focalXPosition(focalLength)" cy="150" r="2" fill="red" />
-      <circle v-if="focalLength" :cx="focalXPosition(-focalLength)" cy="150" r="2" fill="red" />
     </svg>
     <span font-family="Verdana" font-size="14" text-anchor="middle" class="p-4 bg-blue-100 rounded-md">
       Focal Length: <span class="font-bold">{{ focalLength }} mm</span>

@@ -58,7 +58,5 @@ export default {
   display: flex;
   justify-content: space-between;
 }
-.left-panel, .right-panel {
-  width: 50%;
-}
+
 </style>
