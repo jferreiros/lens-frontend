@@ -20,7 +20,7 @@ export default createStore({
       state.currentLent = lent;
       state.reset = 0;
     },
-    RESET_CURRENT_LENS(state) {
+    RESET_CURRENT_LENT(state) {
       state.currentLent = {
         frontRadius: 0,
         backRadius: 0,
